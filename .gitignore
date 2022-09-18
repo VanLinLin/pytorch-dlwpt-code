@@ -2,3 +2,7 @@
 tools
 *_old
 .pytorch
+__pycache__
+data
+models
+misc
