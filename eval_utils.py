@@ -18,6 +18,7 @@ import misc.utils as utils
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
+
 def language_eval(dataset, preds, model_id, split):
     import sys
     if 'coco' in dataset:
@@ -41,7 +42,7 @@ def language_eval(dataset, preds, model_id, split):
     # filter results to only those in MSCOCO validation set (will be about a third)
     preds_filt = [p for p in preds if p['image_id'] in valids]
     print('using %d/%d predictions' % (len(preds_filt), len(preds)))
-    json.dump(preds_filt, open(cache_path, 'w')) # serialize to temporary json file. Sigh, COCO API...
+    json.dump(preds_filt, open(cache_path, 'w'))  # serialize to temporary json file. Sigh, COCO API...
 
     cocoRes = coco.loadRes(cache_path)
     cocoEval = COCOEvalCap(coco, cocoRes)
@@ -61,6 +62,7 @@ def language_eval(dataset, preds, model_id, split):
         json.dump({'overall': out, 'imgToEval': imgToEval}, outfile)
 
     return out
+
 
 def eval_split(model, crit, loader, eval_kwargs={}):
     verbose = eval_kwargs.get('verbose', True)
@@ -91,22 +93,22 @@ def eval_split(model, crit, loader, eval_kwargs={}):
                 tmp = [Variable(torch.from_numpy(_)).to(device=device) for _ in tmp]
                 fc_feats, att_feats, labels, masks = tmp
 
-                loss = crit(model(fc_feats, att_feats, labels), labels[:,1:], masks[:,1:]).item()
+                loss = crit(model(fc_feats, att_feats, labels), labels[:, 1:], masks[:, 1:]).item()
             loss_sum = loss_sum + loss
             loss_evals = loss_evals + 1
 
         # forward the model to also get generated samples for each image
         # Only leave one feature for each image, in case duplicate sample
-        tmp = [data['fc_feats'][np.arange(loader.batch_size) * loader.seq_per_img], 
-            data['att_feats'][np.arange(loader.batch_size) * loader.seq_per_img]]
+        tmp = [data['fc_feats'][np.arange(loader.batch_size) * loader.seq_per_img],
+               data['att_feats'][np.arange(loader.batch_size) * loader.seq_per_img]]
         with torch.no_grad():
             tmp = [Variable(torch.from_numpy(_)).to(device=device) for _ in tmp]
             fc_feats, att_feats = tmp
             # forward the model to also get generated samples for each image
             seq, _ = model.sample(fc_feats, att_feats, eval_kwargs)
         seq = seq.cpu().numpy()
-        
-        #set_trace()
+
+        # set_trace()
         sents = utils.decode_sequence(loader.get_vocab(), seq)
 
         for k, sent in enumerate(sents):
@@ -116,12 +118,12 @@ def eval_split(model, crit, loader, eval_kwargs={}):
             predictions.append(entry)
             if eval_kwargs.get('dump_images', 0) == 1:
                 # dump the raw image to vis/ folder
-                cmd = 'cp "' + os.path.join(eval_kwargs['image_root'], data['infos'][k]['file_path']) + '" vis/imgs/img' + str(len(predictions)) + '.jpg' # bit gross
+                cmd = 'cp "' + os.path.join(eval_kwargs['image_root'], data['infos'][k]['file_path']) + '" vis/imgs/img' + str(len(predictions)) + '.jpg'  # bit gross
                 print(cmd)
                 os.system(cmd)
 
             if verbose:
-                print('image %s: %s' %(entry['image_id'], entry['caption']))
+                print('image %s: %s' % (entry['image_id'], entry['caption']))
 
         # if we wrapped around the split or used up val imgs budget then bail
         ix0 = data['bounds']['it_pos_now']
@@ -132,7 +134,7 @@ def eval_split(model, crit, loader, eval_kwargs={}):
             predictions.pop()
 
         if verbose:
-            print('evaluating validation preformance... %d/%d (%f)' %(ix0 - 1, ix1, loss))
+            print('evaluating validation preformance... %d/%d (%f)' % (ix0 - 1, ix1, loss))
 
         if data['bounds']['wrapped']:
             break

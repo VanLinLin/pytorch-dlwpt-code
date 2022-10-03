@@ -2,3 +2,8 @@
 tools
 *_old
 .pytorch
+__pycache__
+data
+models
+misc
+F1388.zip

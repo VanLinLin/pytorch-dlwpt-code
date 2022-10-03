@@ -78,10 +78,10 @@ cnn_model_weights = './data/imagenet_weights/' + opt.cnn_model + '.pth'
 if not os.path.isfile(cnn_model_weights):
     chunk1 = './data/imagenet_weights/' + opt.cnn_model + 'a.pth'
     chunk2 = './data/imagenet_weights/' + opt.cnn_model + 'b.pth'
-    with open(cnn_model_weights,'wb') as destination:
-        with open(chunk1,'rb') as source:
+    with open(cnn_model_weights, 'wb') as destination:
+        with open(chunk1, 'rb') as source:
             shutil.copyfileobj(source, destination)
-        with open(chunk2,'rb') as source:
+        with open(chunk2, 'rb') as source:
             shutil.copyfileobj(source, destination)
 
 # Load infos
@@ -105,9 +105,9 @@ for k in vars(infos['opt']).keys():
         if k in vars(opt):
             assert vars(opt)[k] == vars(infos['opt'])[k], k + ' option not consistent'
         else:
-            vars(opt).update({k: vars(infos['opt'])[k]}) # copy over options from model
+            vars(opt).update({k: vars(infos['opt'])[k]})  # copy over options from model
 
-vocab = infos['vocab'] # ix -> word mapping
+vocab = infos['vocab']  # ix -> word mapping
 
 # Setup the model
 model = models.setup(opt)
