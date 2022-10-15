@@ -1,30 +1,110 @@
-# On Ubuntu, install the following packages:
-# - python3
-# - python3-venv
-#
-# And then the virtual environment can be created by running:
-#
-# python3 -m venv .venv
-# .venv/bin/pip install --upgrade pip
-# .venv/bin/pip install -r requirements.txt
-#
-# Then use .venv/bin/python to run the various training scripts.
-
-blosc>=1.8.1,<2
+absl-py==1.2.0
+asttokens==2.0.8
+autopep8==1.7.0
+backcall==0.2.0
+blosc==1.10.6
+cachetools==5.2.0
+certifi==2022.6.15
+charset-normalizer==2.1.0
+click==7.1.2
+colorama==0.4.5
+cycler==0.11.0
+debugpy==1.6.3
+decorator==5.1.1
 diskcache==4.1.0
-h5py
-jupyter
-matplotlib
-numpy<=1.16.4
-Pillow
-scikit-image>=0.15.0
-scipy
-SimpleITK
-# tensorflow>=1.14,<2
-tensorflow>=1.14
-
-# The book was written targeting PyTorch 1.4, but everything in it should work fine with more up-to-date versions.
-# torch==1.4
-
-# future is here due to a missing dep in caffe2
-# future
+entrypoints==0.4
+executing==0.10.0
+fastjsonschema==2.16.1
+flatbuffers==2.0.7
+fonttools==4.36.0
+google-auth==2.11.0
+google-auth-oauthlib==0.4.6
+grpcio==1.47.0
+h5py==3.7.0
+idna==3.3
+imageio==2.21.3
+importlib-metadata==4.12.0
+ipykernel==6.15.2
+ipython==8.5.0
+ipython-genutils==0.2.0
+jedi==0.18.1
+jupyter-core==4.11.1
+jupyter_client==7.3.5
+keras==2.7.0
+kiwisolver==1.4.4
+libclang==14.0.6
+Markdown==3.4.1
+MarkupSafe==2.1.1
+matplotlib-inline==0.1.6
+micropython-esp32-stubs==1.19.1.post3
+mistune==2.0.4
+nest-asyncio==1.5.5
+networkx==2.8.6
+numpy==1.23.2
+oauthlib==3.2.0
+packaging==21.3
+pandocfilters==1.5.0
+parso==0.8.3
+pep8==1.7.1
+pickleshare==0.7.5
+Pillow==9.2.0
+prometheus-client==0.14.1
+prompt-toolkit==3.0.30
+protobuf==3.19.4
+psutil==5.9.2
+pure-eval==0.2.2
+pyasn1==0.4.8
+pyasn1-modules==0.2.8
+pycodestyle==2.9.1
+pycparser==2.21
+Pygments==2.13.0
+pyparsing==3.0.9
+pyqt6-plugins==6.1.0.2.2
+PyQt6-Qt6==6.3.1
+PyQt6-sip==13.4.0
+pyqt6-tools==6.1.0.3.2
+pyrsistent==0.18.1
+PySide6==6.3.1
+PySide6-Addons==6.3.1
+PySide6-Essentials==6.3.1
+python-dateutil==2.8.2
+python-dotenv==0.20.0
+pytz==2022.2.1
+PyWavelets==1.4.1
+pywin32==304
+pywinpty==2.0.7
+pyzmq==23.2.1
+qt6-applications==6.1.0.2.2
+qt6-tools==6.1.0.1.2
+requests==2.28.1
+requests-oauthlib==1.3.1
+rsa==4.9
+scikit-image==0.19.3
+scipy==1.9.1
+Send2Trash==1.8.0
+shiboken6==6.3.1
+SimpleITK==2.2.0
+six==1.16.0
+soupsieve==2.3.2.post1
+stack-data==0.4.0
+tensorboard-data-server==0.6.1
+tensorboard-plugin-wit==1.8.1
+tensorflow-estimator==2.7.0
+tensorflow-io-gcs-filesystem==0.26.0
+termcolor==1.1.0
+tifffile==2022.8.12
+tinycss2==1.1.1
+toml==0.10.2
+torch==1.12.1+cu116
+torchaudio==0.12.1+cu116
+torchvision==0.13.1+cu116
+tornado==6.2
+traitlets==5.3.0
+typing_extensions==4.3.0
+urllib3==1.26.11
+wcwidth==0.2.5
+webencodings==0.5.1
+Werkzeug==2.2.2
+widgetsnbextension==4.0.3
+wrapt==1.14.1
+zipp==3.8.1
